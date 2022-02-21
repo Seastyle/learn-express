@@ -8,6 +8,11 @@ const app = express()
 app.use(express.json());
 app.use(cors());
 
+// 指定模板存放目录
+app.set('views', 'views');
+// 指定模板引擎为 Handlebars
+app.set('view engine', 'hbs');
+
 //使用参数解析中间件
 //解析 application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));
@@ -26,6 +31,8 @@ function loggingMiddleware(req,res,next) {
 }
 app.use(loggingMiddleware);
 
+
+// 假数据
 let getDatas = [
   {
       "name":"我是get",
@@ -43,7 +50,14 @@ let postDatas = [
 app.get("/", function(req, res) {
   // req.query能得到get请求发送的数据  
   // res.send()  send的好处是 能够自动设置mime类型
-  res.send("It's ok!")
+  
+  // res.send("It's ok!")
+
+  res.render('index');
+})
+
+app.get("/surprise", function(req, res) {
+  res.render('surprise');
 })
 
 app.get("/test", function(req, res) {
