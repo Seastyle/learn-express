@@ -14,6 +14,18 @@ app.use(bodyParser.urlencoded({extended: false}));
 //解析 application/json
 app.use(bodyParser.json());
 
+
+/*
+  在中间件中写 console.log 语句是比较糟糕的做法，因为 console.log（包括其他同步的代码）都会阻塞 Node.js 的异步事件循环，
+  降低服务器的吞吐率。在实际生产中，推荐使用第三方优秀的日志中间件，例如 morgan、winston 等等。
+*/ 
+function loggingMiddleware(req,res,next) {
+  const time = new Date();
+  console.log(`[${time.toLocaleString()}] ${req.method} ${req.url}`);
+  next()
+}
+app.use(loggingMiddleware);
+
 let getDatas = [
   {
       "name":"我是get",
