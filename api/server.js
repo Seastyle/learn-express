@@ -31,6 +31,9 @@ function loggingMiddleware(req,res,next) {
 }
 app.use(loggingMiddleware);
 
+// 添加静态文件中间件如下，并指定静态资源根目录为 public
+app.use(express.static('public'));
+
 
 // 假数据
 let getDatas = [
