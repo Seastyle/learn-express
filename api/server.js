@@ -35,6 +35,8 @@ app.use(loggingMiddleware);
 app.use(express.static('public'));
 
 
+// ---------- 接口 ----------
+
 // 假数据
 let getDatas = [
   {
@@ -50,6 +52,18 @@ let postDatas = [
   }
 ];
 
+app.get("/test", function(req, res) {
+  let rest = req.query;
+  res.send(getDatas)
+})
+
+app.post("/test", function(req, res) {
+  let rest = req.body;
+  res.send(postDatas)
+})
+
+// ---------- 渲染模板 ----------
+
 app.get("/", function(req, res) {
   // req.query能得到get请求发送的数据  
   // res.send()  send的好处是 能够自动设置mime类型
@@ -61,16 +75,6 @@ app.get("/", function(req, res) {
 
 app.get("/surprise", function(req, res) {
   res.render('surprise');
-})
-
-app.get("/test", function(req, res) {
-  let rest = req.query;
-  res.send(getDatas)
-})
-
-app.post("/test", function(req, res) {
-  let rest = req.body;
-  res.send(postDatas)
 })
 
 // ----------  错误处理 ---------
