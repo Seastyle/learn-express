@@ -6,7 +6,7 @@ export default function App() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:4000/test')
+      .get('http://localhost:1000/test')
       .then(function (res) {
         console.log('get请求', res.data);
       })
@@ -14,7 +14,7 @@ export default function App() {
         console.log(e);
       });
     axios
-      .post('http://localhost:4000/test')
+      .post('http://localhost:1000/test')
       .then(function (res) {
         console.log('post请求', res.data);
       })

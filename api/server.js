@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors"); // 处理跨域请求
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // 创建服务器 相当于 http.createServer
 const app = express()
@@ -8,8 +9,11 @@ const app = express()
 app.use(express.json());
 app.use(cors());
 
-// 指定模板存放目录
-app.set('views', 'views');
+// 指定模板存放目录  第一个参数是固定的写法 'views',第二个参数是模板文件所在的根路径
+// app.set('views', 'views');
+app.set('views',path.join(__dirname,'views'));
+
+// view engine: 要使用的模板引擎。例如：app.set('view engine','pug')。 第一个参数是固定的写法，第二个参数是模板文件的后缀名
 // 指定模板引擎为 Handlebars
 app.set('view engine', 'hbs');
 
@@ -94,7 +98,7 @@ app.use('*', (req, res) => {
 
 
 
-app.listen(4000, () => {
-  console.log("app listening on port 4000")
+app.listen(1000, () => {
+  console.log("app listening on port 1000")
 })
 
