@@ -73,6 +73,23 @@ app.post("/test", function(req, res) {
   res.send(postDatas)
 })
 
+// ----------  错误处理 ---------
+
+app.get('/500', (req, res) => {
+  res.status(500).render('500', { val: req.originalUrl });
+
+  // throw new Error('有点炸!');
+});
+
+// 处理访问不存在的路径
+app.use('*', (req, res) => {
+  
+  res.status(404).render('404', { url: req.originalUrl });
+  // res.send('这个页面不存在')
+});
+
+
+
 app.listen(4000, () => {
   console.log("app listening on port 4000")
 })
